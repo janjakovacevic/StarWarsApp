@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center">VIEW SPECIES</h1>
+        <hr/>
+        <p th:text="'Total Results: ' + ${count}"></p>
+        <hr/>
+        <table>
+            <tr style="text-align-last: center">
+                <th>Name</th>
+                <th>Classification</th>
+                <th>Designation</th>
+                <th>Average Height</th>
+                <th>Skin Colors</th>
+                <th>Hair Colors</th>
+                <th>Eye Colors</th>
+                <th>Average Lifespan</th>
+                <th>Language</th>
+            </tr>
+            <tr  th:each="species : ${allSpecies}">
+                <td th:text="${species.name}"></td>
+                <td th:text="${species.classification}"></td>
+                <td th:text="${species.designation}"></td>
+                <td th:text="${species.average_height}"></td>
+                <td th:text="${species.skin_colors}"></td>
+                <td th:text="${species.hair_colors}"></td>
+                <td th:text="${species.eye_colors}"></td>
+                <td th:text="${species.average_lifespan}"></td>
+                <td th:text="${species.language}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

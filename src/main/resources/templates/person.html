@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td th:text="${person.name}"></td>
+            </tr>
+            <tr>
+                <th>Height</th>
+                <td th:text="${person.height}"></td>
+            </tr>
+            <tr>
+                <th>Mass</th>
+                <td th:text="${person.mass}"></td>
+            </tr>
+            <tr>
+                <th>Hair Color</th>
+                <td th:text="${person.hair_color}"></td>
+            </tr>
+            <tr>
+                <th>Skin Color</th>
+                <td th:text="${person.skin_color}"></td>
+            </tr>
+            <tr>
+                <th>Eye Color</th>
+                <td th:text="${person.eye_color}"></td>
+            </tr>
+            <tr>
+                <th>Birth Year</th>
+                <td th:text="${person.birth_year}"></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td th:text="${person.gender}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+

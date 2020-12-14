@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center">VIEW VEHICLES</h1>
+        <hr/>
+        <p th:text="'Total Results: ' + ${count}"></p>
+        <hr/>
+        <table>
+            <tr style="text-align-last: center">
+                <th>Name</th>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Cost In Credits</th>
+                <th>Length</th>
+                <th>Max Speed</th>
+                <th>Crew</th>
+                <th>Passengers</th>
+                <th>Consumable</th>
+                <th>Vehicle Class</th>
+            </tr>
+            <tr  th:each="vehicle : ${vehicles}">
+                <td th:text="${vehicle.name}"></td>
+                <td th:text="${vehicle.model}"></td>
+                <td th:text="${vehicle.manufacturer}"></td>
+                <td th:text="${vehicle.cost_in_credits}"></td>
+                <td th:text="${vehicle.length}"></td>
+                <td th:text="${vehicle.max_atmosphering_speed}"></td>
+                <td th:text="${vehicle.crew}"></td>
+                <td th:text="${vehicle.passengers}"></td>
+                <td th:text="${vehicle.consumables}"></td>
+                <td th:text="${vehicle.vehicle_class}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      layout:decorator="fragments/layout">-->
+
+<!--<head>-->
+<!--    <title>Star Wars</title>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<div layout:fragment="content">-->
+
+<!--    <h1 style="text-align: center">BROWSE PEOPLE</h1>-->
+
+<!--    <form class="filter" action="/actors">-->
+<!--        <table class="filter-table">-->
+<!--            <tr>-->
+<!--                <td class="no-border">-->
+<!--                    <label>-->
+<!--                        Name:-->
+<!--                        <select name="firstName" class="selection-menu">-->
+<!--                            <option>ALL PEOPLE</option>-->
+<!--                            <option th:each="person : ${people}" th:text="${person.name}">-->
+<!--                        </select>-->
+<!--                        <select class="form-control" style="text-align-last: center" id="traineeSelector" th:name="traineeId">-->
+<!--                            <option th:each="trainee: ${traineeList}" th:value="${trainee.traineeId}" th:text="${trainee.firstName} + ' ' + ${trainee.lastName}">Trainee</option>-->
+<!--                        </select>-->
+<!--                    </label>-->
+<!--                </td>-->
+<!--                <td class="no-border">-->
+<!--                    <input type="submit" value="Search" class="button">-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </form>-->
+<!--    <div class="actor-container">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <th>Actor ID</th>-->
+<!--                <th>First Name</th>-->
+<!--                <th>Last Name</th>-->
+<!--            </tr>-->
+<!--            <tr th:each="actor: ${actors}">-->
+<!--                <td><a class="hyperlink-text" th:href="@{actors/details(id=${actor.actorId})}" th:text="${actor.actorId}">Actor</a></td>-->
+<!--                <td th:text="${actor.firstName}"></td>-->
+<!--                <td th:text="${actor.lastName}"></td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center">VIEW PEOPLE</h1>
+        <hr/>
+        <p th:text="'Total Results: ' + ${count}"></p>
+        <hr/>
+        <table>
+            <tr style="text-align-last: center">
+                <th>Name</th>
+                <th>Height</th>
+                <th>Mass</th>
+                <th>Hair Color</th>
+                <th>Skin Color</th>
+                <th>Eye Color</th>
+                <th>Birth Year</th>
+                <th>Gender</th>
+            </tr>
+            <tr  th:each="person : ${people}">
+                <td th:text="${person.name}"></td>
+                <td th:text="${person.height}"></td>
+                <td th:text="${person.mass}"></td>
+                <td th:text="${person.hair_color}"></td>
+                <td th:text="${person.skin_color}"></td>
+                <td th:text="${person.eye_color}"></td>
+                <td th:text="${person.birth_year}"></td>
+                <td th:text="${person.gender}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+

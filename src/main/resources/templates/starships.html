@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center">VIEW STARSHIPS</h1>
+        <hr/>
+        <p th:text="'Total Results: ' + ${count}"></p>
+        <hr/>
+        <table>
+            <tr style="text-align-last: center">
+                <th>Name</th>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Cost In Credits</th>
+                <th>Length</th>
+                <th>Max Speed</th>
+                <th>Crew</th>
+                <th>Passengers</th>
+                <th>Consumable</th>
+                <th>Starship Class</th>
+            </tr>
+            <tr  th:each="starship : ${starships}">
+                <td th:text="${starship.name}"></td>
+                <td th:text="${starship.model}"></td>
+                <td th:text="${starship.manufacturer}"></td>
+                <td th:text="${starship.cost_in_credits}"></td>
+                <td th:text="${starship.length}"></td>
+                <td th:text="${starship.max_atmosphering_speed}"></td>
+                <td th:text="${starship.crew}"></td>
+                <td th:text="${starship.passengers}"></td>
+                <td th:text="${starship.consumables}"></td>
+                <td th:text="${starship.starship_class}"></td>
+            </tr>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
