@@ -11,31 +11,31 @@
 
 <div layout:fragment="content">
     <div class="jumbotron" style="text-align: center">
-        <h1 style="text-align: center">VIEW FILMS</h1>
-        <hr/>
-            <form class="filter" action="/films">
-                <label>Search by Title:</label>
-                <input type="text" th:name="title">
-                <input type="submit" value="Search" class="button">
-            </form>
-        <hr/>
-        <p th:text="'Total Results: ' + ${count}"></p>
+        <h1 style="text-align: center" th:text="${film.title}"></h1>
         <hr/>
         <table>
-            <tr style="text-align-last: center">
+            <tr>
                 <th>Title</th>
-                <th>Episode</th>
-                <th>Opening Crawl</th>
-                <th>Director</th>
-                <th>Producer</th>
-                <th>Release Date</th>
-            </tr>
-            <tr  th:each="film : ${films}">
                 <td th:text="${film.title}"></td>
+            </tr>
+            <tr>
+                <th>Episode</th>
                 <td th:text="${film.episode_id}"></td>
+            </tr>
+            <tr>
+                <th>Opening Crawl</th>
                 <td th:text="${film.opening_crawl}"></td>
+            </tr>
+            <tr>
+                <th>Director</th>
                 <td th:text="${film.director}"></td>
+            </tr>
+            <tr>
+                <th>Producer</th>
                 <td th:text="${film.producer}"></td>
+            </tr>
+            <tr>
+                <th>Release Date</th>
                 <td th:text="${film.release_date}"></td>
             </tr>
         </table>
@@ -44,3 +44,4 @@
 
 </body>
 </html>
+

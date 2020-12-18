@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
@@ -12,6 +11,8 @@
 
 <div layout:fragment="content">
     <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center" th:text="${person.name}"></h1>
+        <hr/>
         <table>
             <tr>
                 <th>Name</th>

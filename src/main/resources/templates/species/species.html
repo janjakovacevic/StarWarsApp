@@ -11,37 +11,43 @@
 
 <div layout:fragment="content">
     <div class="jumbotron" style="text-align: center">
-        <h1 style="text-align: center">VIEW SPECIES</h1>
-        <hr/>
-            <form class="filter" action="/species">
-                <label>Search by Name:</label>
-                <input type="text" th:name="name">
-                <input type="submit" value="Search" class="button">
-            </form>
-        <hr/>
-        <p th:text="'Total Results: ' + ${count}"></p>
+        <h1 style="text-align: center" th:text="${species.name}"></h1>
         <hr/>
         <table>
-            <tr style="text-align-last: center">
+            <tr>
                 <th>Name</th>
-                <th>Classification</th>
-                <th>Designation</th>
-                <th>Average Height</th>
-                <th>Skin Colors</th>
-                <th>Hair Colors</th>
-                <th>Eye Colors</th>
-                <th>Average Lifespan</th>
-                <th>Language</th>
-            </tr>
-            <tr  th:each="species : ${allSpecies}">
                 <td th:text="${species.name}"></td>
+            </tr>
+            <tr>
+                <th>Classification</th>
                 <td th:text="${species.classification}"></td>
+            </tr>
+            <tr>
+                <th>Designation</th>
                 <td th:text="${species.designation}"></td>
+            </tr>
+            <tr>
+                <th>Average Height</th>
                 <td th:text="${species.average_height}"></td>
+            </tr>
+            <tr>
+                <th>Skin Colors</th>
                 <td th:text="${species.skin_colors}"></td>
+            </tr>
+            <tr>
+                <th>Hair Colors</th>
                 <td th:text="${species.hair_colors}"></td>
+            </tr>
+            <tr>
+                <th>Eye Colors</th>
                 <td th:text="${species.eye_colors}"></td>
+            </tr>
+            <tr>
+                <th>Average Lifespan</th>
                 <td th:text="${species.average_lifespan}"></td>
+            </tr>
+            <tr>
+                <th>Language</th>
                 <td th:text="${species.language}"></td>
             </tr>
         </table>
@@ -50,3 +56,4 @@
 
 </body>
 </html>
+

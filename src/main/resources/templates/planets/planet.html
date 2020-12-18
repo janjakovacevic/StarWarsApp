@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center" th:text="${planet.name}"></h1>
+        <hr/>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td th:text="${planet.name}"></td>
+            </tr>
+            <tr>
+                <th>Rotation Period</th>
+                <td th:text="${planet.rotation_period}"></td>
+            </tr>
+            <tr>
+                <th>Orbital Period</th>
+                <td th:text="${planet.orbital_period}"></td>
+            </tr>
+            <tr>
+                <th>Diameter</th>
+                <td th:text="${planet.diameter}"></td>
+            </tr>
+            <tr>
+                <th>Climate</th>
+                <td th:text="${planet.climate}"></td>
+            </tr>
+            <tr>
+                <th>Gravity</th>
+                <td th:text="${planet.gravity}"></td>
+            </tr>
+            <tr>
+                <th>Terrain</th>
+                <td th:text="${planet.terrain}"></td>
+            </tr>
+            <tr>
+                <th>Surface Water</th>
+                <td th:text="${planet.surface_water}"></td>
+            </tr>
+            <tr>
+                <th>Population</th>
+                <td th:text="${planet.population}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+

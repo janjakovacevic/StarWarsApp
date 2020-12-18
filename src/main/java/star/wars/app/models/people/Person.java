@@ -1,6 +1,12 @@
 package star.wars.app.models.people;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import star.wars.app.models.films.Film;
+import star.wars.app.models.species.Species;
+import star.wars.app.models.starships.Starship;
+import star.wars.app.models.vehicles.Vehicle;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {
@@ -13,6 +19,33 @@ public class Person {
     String eye_color;
     String birth_year;
     String gender;
+//    String homeworld;
+//    List<Film> films;
+//    List<Species> species;
+//    List<Vehicle> vehicles;
+//    List<Starship> starships;
+
+
+
+//    "homeworld": "http://swapi.dev/api/planets/1/",
+//            "films": [
+//            "http://swapi.dev/api/films/1/",
+//            "http://swapi.dev/api/films/2/",
+//            "http://swapi.dev/api/films/3/",
+//            "http://swapi.dev/api/films/4/",
+//            "http://swapi.dev/api/films/5/",
+//            "http://swapi.dev/api/films/6/"
+//            ],
+//            "species": [
+//            "http://swapi.dev/api/species/2/"
+//            ],
+//            "vehicles": [],
+//            "starships": [],
+//            "created": "2014-12-10T15:10:51.357000Z",
+//            "edited": "2014-12-20T21:17:50.309000Z",
+//            "url": "http://swapi.dev/api/people/2/"
+
+
 
     public Person() {
     }

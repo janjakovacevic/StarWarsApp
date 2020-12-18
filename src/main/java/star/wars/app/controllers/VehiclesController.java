@@ -3,6 +3,7 @@ package star.wars.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import star.wars.app.models.vehicles.Vehicle;
@@ -15,8 +16,25 @@ import java.util.List;
 @Controller
 public class VehiclesController {
 
+    @GetMapping("/vehicles/details/{name}")
+    public String viewVehicle(RestTemplate restTemplate, ModelMap modelMap,
+                                  @PathVariable String name) {
+
+        List<Vehicle> results = new ArrayList<>();
+        Vehicles vehicles = restTemplate.getForObject(EndPoints.SEARCH_VEHICLES + name, Vehicles.class);
+
+        while(vehicles.getNext() != null){
+            results.addAll(vehicles.getResults());
+            String nextPage = vehicles.getNext().replace("http", "https");
+            vehicles = restTemplate.getForObject(nextPage, Vehicles.class);
+        }
+        results.addAll(vehicles.getResults());
+        modelMap.addAttribute("vehicle", results.get(0));
+        return "/vehicles/vehicle";
+    }
+
     @GetMapping("/vehicles")
-    public String viewAllVehicles(RestTemplate restTemplate, ModelMap modelMap,
+    public String searchVehicles(RestTemplate restTemplate, ModelMap modelMap,
                                   @RequestParam(value = "query", defaultValue = "") String query) {
 
         List<Vehicle> results = new ArrayList<>();
@@ -30,7 +48,7 @@ public class VehiclesController {
         results.addAll(vehicles.getResults());
         modelMap.addAttribute("count", vehicles.getCount());
         modelMap.addAttribute("vehicles", results);
-        return "/vehicles";
+        return "/vehicles/vehicles";
     }
 
 }

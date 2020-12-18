@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+
+<head>
+    <title>Star Wars</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron" style="text-align: center">
+        <h1 style="text-align: center">VIEW FILMS</h1>
+        <hr/>
+            <form class="filter" action="/films">
+                <label>Search by Title:</label>
+                <input type="text" th:name="title">
+                <input type="submit" value="Search" class="button">
+            </form>
+        <hr/>
+        <p th:text="'Total Results: ' + ${count}"></p>
+        <hr/>
+        <table>
+            <tr style="text-align-last: center">
+                <th>Title</th>
+                <th>Episode</th>
+                <th>Opening Crawl</th>
+                <th>Director</th>
+                <th>Producer</th>
+                <th>Release Date</th>
+            </tr>
+            <tr  th:each="film : ${films}">
+                <td><a class="hyperlink-text" th:href="${'/films/details/' + film.title}" th:text="${film.title}">Name</a></td>
+                <td th:text="${film.episode_id}"></td>
+                <td th:text="${film.opening_crawl}"></td>
+                <td th:text="${film.director}"></td>
+                <td th:text="${film.producer}"></td>
+                <td th:text="${film.release_date}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
