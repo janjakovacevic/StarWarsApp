@@ -3,6 +3,7 @@ package star.wars.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import star.wars.app.models.starships.Starship;
 import star.wars.app.models.starships.Starships;
@@ -15,10 +16,11 @@ import java.util.List;
 public class StarshipsController {
 
     @GetMapping("/starships")
-    public String viewAllStarships(RestTemplate restTemplate, ModelMap modelMap) {
+    public String viewAllStarships(RestTemplate restTemplate, ModelMap modelMap,
+                                   @RequestParam(value = "query", defaultValue = "") String query) {
 
         List<Starship> results = new ArrayList<>();
-        Starships starships = restTemplate.getForObject(EndPoints.STARSHIPS, Starships.class);
+        Starships starships = restTemplate.getForObject(EndPoints.SEARCH_STARSHIPS + query, Starships.class);
 
         while(starships.getNext() != null){
             results.addAll(starships.getResults());

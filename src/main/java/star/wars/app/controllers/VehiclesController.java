@@ -3,9 +3,8 @@ package star.wars.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-import star.wars.app.models.starships.Starship;
-import star.wars.app.models.starships.Starships;
 import star.wars.app.models.vehicles.Vehicle;
 import star.wars.app.models.vehicles.Vehicles;
 import star.wars.app.utilities.EndPoints;
@@ -17,10 +16,11 @@ import java.util.List;
 public class VehiclesController {
 
     @GetMapping("/vehicles")
-    public String viewAllVehicles(RestTemplate restTemplate, ModelMap modelMap) {
+    public String viewAllVehicles(RestTemplate restTemplate, ModelMap modelMap,
+                                  @RequestParam(value = "query", defaultValue = "") String query) {
 
         List<Vehicle> results = new ArrayList<>();
-        Vehicles vehicles = restTemplate.getForObject(EndPoints.VEHICLES, Vehicles.class);
+        Vehicles vehicles = restTemplate.getForObject(EndPoints.SEARCH_VEHICLES + query, Vehicles.class);
 
         while(vehicles.getNext() != null){
             results.addAll(vehicles.getResults());

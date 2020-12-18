@@ -3,6 +3,7 @@ package star.wars.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import star.wars.app.models.films.Film;
 import star.wars.app.models.films.Films;
@@ -17,10 +18,11 @@ import java.util.List;
 public class SpeciesController {
 
     @GetMapping("/species")
-    public String viewAllSpecies(RestTemplate restTemplate, ModelMap modelMap) {
+    public String searchSpecies(RestTemplate restTemplate, ModelMap modelMap,
+                                @RequestParam(value = "name", defaultValue = "") String name) {
 
         List<Species> results = new ArrayList<>();
-        AllSpecies allSpecies = restTemplate.getForObject(EndPoints.SPECIES, AllSpecies.class);
+        AllSpecies allSpecies = restTemplate.getForObject(EndPoints.SEARCH_SPECIES + name, AllSpecies.class);
 
         while(allSpecies.getNext() != null){
             results.addAll(allSpecies.getResults());

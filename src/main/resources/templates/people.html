@@ -69,6 +69,12 @@
     <div class="jumbotron" style="text-align: center">
         <h1 style="text-align: center">VIEW PEOPLE</h1>
         <hr/>
+            <form class="filter" action="/people">
+                <label>Search by Name:</label>
+                <input type="text" th:name="name">
+                <input type="submit" value="Search" class="button">
+            </form>
+        <hr/>
         <p th:text="'Total Results: ' + ${count}"></p>
         <hr/>
         <table>

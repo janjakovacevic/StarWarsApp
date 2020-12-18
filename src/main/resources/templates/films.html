@@ -13,6 +13,12 @@
     <div class="jumbotron" style="text-align: center">
         <h1 style="text-align: center">VIEW FILMS</h1>
         <hr/>
+            <form class="filter" action="/films">
+                <label>Search by Title:</label>
+                <input type="text" th:name="title">
+                <input type="submit" value="Search" class="button">
+            </form>
+        <hr/>
         <p th:text="'Total Results: ' + ${count}"></p>
         <hr/>
         <table>

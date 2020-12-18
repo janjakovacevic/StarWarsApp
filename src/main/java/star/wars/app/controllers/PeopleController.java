@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import star.wars.app.models.people.People;
 import star.wars.app.models.people.Person;
@@ -24,10 +25,11 @@ public class PeopleController {
     }
 
     @GetMapping("/people")
-    public String viewAllPeople(RestTemplate restTemplate, ModelMap modelMap) {
+    public String searchPeople(RestTemplate restTemplate, ModelMap modelMap,
+                               @RequestParam(value = "name", defaultValue = "") String name) {
 
         List<Person> results = new ArrayList<>();
-        People people = restTemplate.getForObject(EndPoints.PEOPLE, People.class);
+        People people = restTemplate.getForObject(EndPoints.SEARCH_PEOPLE + name, People.class);
 
         while(people.getNext() != null){
             results.addAll(people.getResults());
