@@ -46,6 +46,42 @@
                 <th>Gender</th>
                 <td th:text="${person.gender}"></td>
             </tr>
+            <tr>
+                <th>Homeworld</th>
+                <td><a class="hyperlink-text" th:href="${'/planets/details/' + person.homeworld}" th:text="${person.homeworld}">Planet Name</a></td>
+            </tr>
+            <tr>
+                <th>Films</th>
+                <td>
+                    <div th:each="film : ${person.films}">
+                        <a class="hyperlink-text" th:href="${'/films/details/' + film}" th:text="${film}">Title</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Species</th>
+                <td>
+                    <div th:each="species : ${person.species}">
+                        <a class="hyperlink-text" th:href="${'/species/details/' + species}" th:text="${species}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Vehicles</th>
+                <td>
+                    <div th:each="vehicle : ${person.vehicles}">
+                        <a class="hyperlink-text" th:href="${'/vehicles/details/' + vehicle}" th:text="${vehicle}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Starships</th>
+                <td>
+                    <div th:each="starship : ${person.starships}">
+                        <a class="hyperlink-text" th:href="${'/starships/details/' + starship}" th:text="${starship}">Name</a>
+                    </div>
+                </td>
+            </tr>
         </table>
     </div>
 </div>

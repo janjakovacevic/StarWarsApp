@@ -19,11 +19,11 @@ public class Person {
     String eye_color;
     String birth_year;
     String gender;
-//    String homeworld;
-//    List<Film> films;
-//    List<Species> species;
-//    List<Vehicle> vehicles;
-//    List<Starship> starships;
+    String homeworld;
+    List<String> films;
+    List<String> species;
+    List<String> vehicles;
+    List<String> starships;
 
 
 
@@ -112,5 +112,45 @@ public class Person {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getHomeworld() {
+        return homeworld;
+    }
+
+    public void setHomeworld(String homeworld) {
+        this.homeworld = homeworld;
+    }
+
+    public List<String> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<String> films) {
+        this.films = films;
+    }
+
+    public List<String> getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(List<String> species) {
+        this.species = species;
+    }
+
+    public List<String> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<String> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public List<String> getStarships() {
+        return starships;
+    }
+
+    public void setStarships(List<String> starships) {
+        this.starships = starships;
     }
 }
