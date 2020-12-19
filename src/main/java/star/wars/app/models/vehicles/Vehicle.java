@@ -1,5 +1,10 @@
 package star.wars.app.models.vehicles;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Vehicle {
 
     String name;
@@ -13,6 +18,8 @@ public class Vehicle {
     String cargo_capacity;
     String consumables;
     String vehicle_class;
+    List<String> pilots;
+    List<String> films;
 
     public Vehicle() {
     }
@@ -103,5 +110,21 @@ public class Vehicle {
 
     public void setVehicle_class(String vehicle_class) {
         this.vehicle_class = vehicle_class;
+    }
+
+    public List<String> getPilots() {
+        return pilots;
+    }
+
+    public void setPilots(List<String> pilots) {
+        this.pilots = pilots;
+    }
+
+    public List<String> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<String> films) {
+        this.films = films;
     }
 }

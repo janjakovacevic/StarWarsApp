@@ -1,5 +1,10 @@
 package star.wars.app.models.species;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Species {
 
     String name;
@@ -10,8 +15,10 @@ public class Species {
     String hair_colors;
     String eye_colors;
     String average_lifespan;
-//    String homeworld; //get planet
+    String homeworld;
     String language;
+    List<String> people;
+    List<String> films;
 
     public Species() {
     }
@@ -80,13 +87,13 @@ public class Species {
         this.average_lifespan = average_lifespan;
     }
 
-//    public String getHomeworld() {
-//        return homeworld;
-//    }
-//
-//    public void setHomeworld(String homeworld) {
-//        this.homeworld = homeworld;
-//    }
+    public String getHomeworld() {
+        return homeworld;
+    }
+
+    public void setHomeworld(String homeworld) {
+        this.homeworld = homeworld;
+    }
 
     public String getLanguage() {
         return language;
@@ -94,5 +101,21 @@ public class Species {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public List<String> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<String> people) {
+        this.people = people;
+    }
+
+    public List<String> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<String> films) {
+        this.films = films;
     }
 }

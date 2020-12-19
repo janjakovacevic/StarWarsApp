@@ -38,6 +38,46 @@
                 <th>Release Date</th>
                 <td th:text="${film.release_date}"></td>
             </tr>
+            <tr>
+                <th>Characters</th>
+                <td>
+                    <div th:each="character : ${film.characters}">
+                        <a class="hyperlink-text" th:href="${'/people/details/' + character}" th:text="${character}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Planets</th>
+                <td>
+                    <div th:each="planet : ${film.planets}">
+                        <a class="hyperlink-text" th:href="${'/planets/details/' + planet}" th:text="${planet}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Starships</th>
+                <td>
+                    <div th:each="starship : ${film.starships}">
+                        <a class="hyperlink-text" th:href="${'/starships/details/' + starship}" th:text="${starship}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Vehicles</th>
+                <td>
+                    <div th:each="vehicle : ${film.vehicles}">
+                        <a class="hyperlink-text" th:href="${'/vehicles/details/' + vehicle}" th:text="${vehicle}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Species</th>
+                <td>
+                    <div th:each="species : ${film.species}">
+                        <a class="hyperlink-text" th:href="${'/species/details/' + species}" th:text="${species}">Name</a>
+                    </div>
+                </td>
+            </tr>
         </table>
     </div>
 </div>

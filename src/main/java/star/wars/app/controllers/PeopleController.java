@@ -35,8 +35,10 @@ public class PeopleController {
         results.addAll(people.getResults());
 
         for(Person person : results){
-            String homeworld = person.getHomeworld().replace("http", "https");
-            person.setHomeworld(restTemplate.getForObject(homeworld, Planet.class).getName());
+            if(person.getHomeworld() != null) {
+                String homeworld = person.getHomeworld().replace("http", "https");
+                person.setHomeworld(restTemplate.getForObject(homeworld, Planet.class).getName());
+            }
 
             List<String> filmTitles = new ArrayList<>();
             for(int i = 0; i < person.getFilms().size(); i++){

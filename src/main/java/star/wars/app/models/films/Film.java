@@ -1,5 +1,10 @@
 package star.wars.app.models.films;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Film {
 
     String title;
@@ -8,6 +13,11 @@ public class Film {
     String director;
     String producer;
     String release_date;
+    List<String> characters;
+    List<String> planets;
+    List<String> starships;
+    List<String> vehicles;
+    List<String> species;
 
     public Film() {
     }
@@ -58,5 +68,45 @@ public class Film {
 
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
+    }
+
+    public List<String> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<String> characters) {
+        this.characters = characters;
+    }
+
+    public List<String> getPlanets() {
+        return planets;
+    }
+
+    public void setPlanets(List<String> planets) {
+        this.planets = planets;
+    }
+
+    public List<String> getStarships() {
+        return starships;
+    }
+
+    public void setStarships(List<String> starships) {
+        this.starships = starships;
+    }
+
+    public List<String> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<String> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public List<String> getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(List<String> species) {
+        this.species = species;
     }
 }

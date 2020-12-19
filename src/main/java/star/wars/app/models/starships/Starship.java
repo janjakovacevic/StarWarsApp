@@ -1,5 +1,10 @@
 package star.wars.app.models.starships;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Starship {
 
     String name;
@@ -15,6 +20,8 @@ public class Starship {
     String hyperdrive_rating;
     String MGLT;
     String starship_class;
+    List<String> pilots;
+    List<String> films;
 
     public Starship() {
     }
@@ -121,5 +128,21 @@ public class Starship {
 
     public void setStarship_class(String starship_class) {
         this.starship_class = starship_class;
+    }
+
+    public List<String> getPilots() {
+        return pilots;
+    }
+
+    public void setPilots(List<String> pilots) {
+        this.pilots = pilots;
+    }
+
+    public List<String> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<String> films) {
+        this.films = films;
     }
 }

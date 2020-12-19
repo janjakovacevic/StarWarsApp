@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import star.wars.app.models.films.Film;
+import star.wars.app.models.people.Person;
 import star.wars.app.models.starships.Starship;
 import star.wars.app.models.starships.Starships;
+import star.wars.app.models.vehicles.Vehicle;
 import star.wars.app.utilities.EndPoints;
 
 import java.util.ArrayList;
@@ -29,6 +32,25 @@ public class StarshipsController {
             starships = restTemplate.getForObject(nextPage, Starships.class);
         }
         results.addAll(starships.getResults());
+
+        for (Starship starship : results) {
+
+            List<String> pilotsNames = new ArrayList<>();
+            for(int i = 0; i < starship.getPilots().size(); i++){
+                String pilot = starship.getPilots().get(i).replace("http", "https");
+                pilotsNames.add(restTemplate.getForObject(pilot, Person.class).getName());
+            }
+            starship.setPilots(pilotsNames);
+
+            List<String> filmTitles = new ArrayList<>();
+            for (int i = 0; i < starship.getFilms().size(); i++) {
+                String film = starship.getFilms().get(i).replace("http", "https");
+                filmTitles.add(restTemplate.getForObject(film, Film.class).getTitle());
+            }
+            starship.setFilms(filmTitles);
+
+        }
+
         modelMap.addAttribute("starship", results.get(0));
         return "/starships/starship";
     }

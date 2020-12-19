@@ -47,8 +47,28 @@
                 <td th:text="${species.average_lifespan}"></td>
             </tr>
             <tr>
+                <th>Homeworld</th>
+                <td><a class="hyperlink-text" th:href="${'/planets/details/' + species.homeworld}" th:text="${species.homeworld}">Planet Name</a></td>
+            </tr>
+            <tr>
                 <th>Language</th>
                 <td th:text="${species.language}"></td>
+            <tr>
+                <th>People</th>
+                <td>
+                    <div th:each="person : ${species.people}">
+                        <a class="hyperlink-text" th:href="${'/people/details/' + person}" th:text="${person}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            </tr>
+            <tr>
+                <th>Films</th>
+                <td>
+                    <div th:each="film : ${species.films}">
+                        <a class="hyperlink-text" th:href="${'/films/details/' + film}" th:text="${film}">Title</a>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>

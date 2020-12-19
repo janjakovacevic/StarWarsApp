@@ -50,6 +50,23 @@
                 <th>Population</th>
                 <td th:text="${planet.population}"></td>
             </tr>
+            <tr>
+                <th>Residents</th>
+                <td>
+                    <div th:each="resident : ${planet.residents}">
+                        <a class="hyperlink-text" th:href="${'/people/details/' + resident}" th:text="${resident}">Name</a>
+                    </div>
+                </td>
+            </tr>
+            </tr>
+            <tr>
+                <th>Films</th>
+                <td>
+                    <div th:each="film : ${planet.films}">
+                        <a class="hyperlink-text" th:href="${'/films/details/' + film}" th:text="${film}">Title</a>
+                    </div>
+                </td>
+            </tr>
         </table>
     </div>
 </div>

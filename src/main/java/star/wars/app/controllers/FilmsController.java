@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import star.wars.app.models.films.Film;
 import star.wars.app.models.films.Films;
+import star.wars.app.models.people.Person;
+import star.wars.app.models.planets.Planet;
+import star.wars.app.models.species.Species;
+import star.wars.app.models.starships.Starship;
+import star.wars.app.models.vehicles.Vehicle;
 import star.wars.app.utilities.EndPoints;
 
 import java.util.ArrayList;
@@ -29,6 +34,49 @@ public class FilmsController {
             films = restTemplate.getForObject(nextPage, Films.class);
         }
         results.addAll(films.getResults());
+
+
+        for(Film film : results){
+
+            List<String> characterNames = new ArrayList<>();
+            for(int i = 0; i < film.getCharacters().size(); i++){
+                String character = film.getCharacters().get(i).replace("http", "https");
+                characterNames.add(restTemplate.getForObject(character, Person.class).getName());
+            }
+            film.setCharacters(characterNames);
+
+            List<String> planetNames = new ArrayList<>();
+            for(int i = 0; i < film.getPlanets().size(); i++) {
+                String planet = film.getPlanets().get(i).replace("http", "https");
+                planetNames.add(restTemplate.getForObject(planet, Planet.class).getName());
+            }
+            film.setPlanets(planetNames);
+
+            List<String> starshipNames = new ArrayList<>();
+            for(int i = 0; i < film.getStarships().size(); i++){
+                String starship = film.getStarships().get(i).replace("http", "https");
+                starshipNames.add(restTemplate.getForObject(starship, Starship.class).getName());
+            }
+            film.setStarships(starshipNames);
+
+            List<String> vehicleNames = new ArrayList<>();
+            for(int i = 0; i < film.getVehicles().size(); i++){
+                String vehicle = film.getVehicles().get(i).replace("http", "https");
+                vehicleNames.add(restTemplate.getForObject(vehicle, Vehicle.class).getName());
+            }
+            film.setVehicles(vehicleNames);
+
+            List<String> speciesNames = new ArrayList<>();
+            for(int i = 0; i < film.getSpecies().size(); i++){
+                String species = film.getSpecies().get(i).replace("http", "https");
+                speciesNames.add(restTemplate.getForObject(species, Species.class).getName());
+            }
+            film.setSpecies(speciesNames);
+
+        }
+
+
+
         modelMap.addAttribute("film", results.get(0));
         return "/films/film";
     }

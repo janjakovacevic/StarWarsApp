@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import star.wars.app.models.films.Film;
+import star.wars.app.models.people.Person;
+import star.wars.app.models.planets.Planet;
 import star.wars.app.models.species.AllSpecies;
 import star.wars.app.models.species.Species;
 import star.wars.app.utilities.EndPoints;
@@ -29,7 +32,31 @@ public class SpeciesController {
             allSpecies = restTemplate.getForObject(nextPage, AllSpecies.class);
         }
         results.addAll(allSpecies.getResults());
-        modelMap.addAttribute("species", results.get(0));
+
+        for(Species species : results) {
+            if(species.getHomeworld() != null) {
+                String homeworld = species.getHomeworld().replace("http", "https");
+                species.setHomeworld(restTemplate.getForObject(homeworld, Planet.class).getName());
+            }
+
+            List<String> peopleNames = new ArrayList<>();
+            for (int i = 0; i < species.getPeople().size(); i++) {
+                String person = species.getPeople().get(i).replace("http", "https");
+                peopleNames.add(restTemplate.getForObject(person, Person.class).getName());
+            }
+            species.setPeople(peopleNames);
+
+            List<String> filmTitles = new ArrayList<>();
+            for (int i = 0; i < species.getFilms().size(); i++) {
+                String film = species.getFilms().get(i).replace("http", "https");
+                filmTitles.add(restTemplate.getForObject(film, Film.class).getTitle());
+            }
+            species.setFilms(filmTitles);
+
+        }
+
+
+            modelMap.addAttribute("species", results.get(0));
         return "/species/species";
     }
 

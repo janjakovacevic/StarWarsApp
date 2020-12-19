@@ -1,5 +1,10 @@
 package star.wars.app.models.planets;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Planet {
 
     String name;
@@ -11,6 +16,8 @@ public class Planet {
     String terrain;
     String surface_water;
     String population;
+    List<String> residents;
+    List<String> films;
 
     public Planet() {
     }
@@ -85,5 +92,21 @@ public class Planet {
 
     public void setPopulation(String population) {
         this.population = population;
+    }
+
+    public List<String> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<String> residents) {
+        this.residents = residents;
+    }
+
+    public List<String> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<String> films) {
+        this.films = films;
     }
 }
