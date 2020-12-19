@@ -19,9 +19,9 @@ import java.util.List;
 @Controller
 public class SpeciesController {
 
-    @GetMapping("/species/details/{name}")
+    @GetMapping("/species/details")
     public String viewSpecies(RestTemplate restTemplate, ModelMap modelMap,
-                                @PathVariable String name) {
+                              @RequestParam(value = "name", defaultValue = "") String name) {
 
         List<Species> results = new ArrayList<>();
         AllSpecies allSpecies = restTemplate.getForObject(EndPoints.SEARCH_SPECIES + name, AllSpecies.class);
@@ -56,7 +56,7 @@ public class SpeciesController {
         }
 
 
-            modelMap.addAttribute("species", results.get(0));
+        modelMap.addAttribute("species", results.get(0));
         return "/species/species";
     }
 
@@ -73,7 +73,7 @@ public class SpeciesController {
             allSpecies = restTemplate.getForObject(nextPage, AllSpecies.class);
         }
         results.addAll(allSpecies.getResults());
-        modelMap.addAttribute("count", allSpecies.getCount());
+        modelMap.addAttribute("count", results.size());
         modelMap.addAttribute("allSpecies", results);
         return "/species/all-species";
     }

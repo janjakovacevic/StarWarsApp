@@ -58,7 +58,7 @@
                 <th>Pilots</th>
                 <td>
                     <div th:each="pilot : ${starship.pilots}">
-                        <a class="hyperlink-text" th:href="${'/people/details/' + pilot}" th:text="${pilot}">Name</a>
+                        <a class="hyperlink-text" th:href="@{/people/details(name=${pilot})}" th:text="${pilot}">Name</a>
                     </div>
                 </td>
             </tr>
@@ -66,7 +66,7 @@
                 <th>Films</th>
                 <td>
                     <div th:each="film : ${starship.films}">
-                        <a class="hyperlink-text" th:href="${'/films/details/' + film}" th:text="${film}">Title</a>
+                        <a class="hyperlink-text" th:href="@{/films/details(title=${film})}" th:text="${film}">Title</a>
                     </div>
                 </td>
             </tr>

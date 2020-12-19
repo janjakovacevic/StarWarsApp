@@ -35,7 +35,7 @@
                 <th>Starship Class</th>
             </tr>
             <tr  th:each="starship : ${starships}">
-                <td><a class="hyperlink-text" th:href="${'/starships/details/' + starship.name}" th:text="${starship.name}">Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/starships/details(name=${starship.name})}" th:text="${starship.name}">Name</a></td>
                 <td th:text="${starship.model}"></td>
                 <td th:text="${starship.manufacturer}"></td>
                 <td th:text="${starship.cost_in_credits}"></td>

@@ -89,7 +89,7 @@
                 <th>Gender</th>
             </tr>
             <tr  th:each="person : ${people}">
-                <td><a class="hyperlink-text" th:href="${'/people/details/' + person.name}" th:text="${person.name}">Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/people/details(name=${person.name})}" th:text="${person.name}">Name</a></td>
                 <td th:text="${person.height}"></td>
                 <td th:text="${person.mass}"></td>
                 <td th:text="${person.hair_color}"></td>

@@ -35,7 +35,7 @@
                 <th>Vehicle Class</th>
             </tr>
             <tr  th:each="vehicle : ${vehicles}">
-                <td><a class="hyperlink-text" th:href="${'/vehicles/details/' + vehicle.name}" th:text="${vehicle.name}">Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/vehicles/details(name=${vehicle.name})}" th:text="${vehicle.name}">Name</a></td>
                 <td th:text="${vehicle.model}"></td>
                 <td th:text="${vehicle.manufacturer}"></td>
                 <td th:text="${vehicle.cost_in_credits}"></td>

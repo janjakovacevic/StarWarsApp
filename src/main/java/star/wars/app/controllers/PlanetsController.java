@@ -3,7 +3,6 @@ package star.wars.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,7 +10,6 @@ import star.wars.app.models.films.Film;
 import star.wars.app.models.people.Person;
 import star.wars.app.models.planets.Planet;
 import star.wars.app.models.planets.Planets;
-import star.wars.app.models.vehicles.Vehicle;
 import star.wars.app.utilities.EndPoints;
 
 import java.util.ArrayList;
@@ -20,9 +18,9 @@ import java.util.List;
 @Controller
 public class PlanetsController {
 
-    @GetMapping("/planets/details/{name}")
+    @GetMapping("/planets/details")
     public String viewPlanet(RestTemplate restTemplate, ModelMap modelMap,
-                                 @PathVariable String name) {
+                             @RequestParam(value = "name", defaultValue = "") String name) {
 
         List<Planet> results = new ArrayList<>();
         Planets planets = restTemplate.getForObject(EndPoints.SEARCH_PLANETS + name, Planets.class);
@@ -69,7 +67,7 @@ public class PlanetsController {
             planets = restTemplate.getForObject(nextPage, Planets.class);
         }
         results.addAll(planets.getResults());
-        modelMap.addAttribute("count", planets.getCount());
+        modelMap.addAttribute("count", results.size());
         modelMap.addAttribute("planets", results);
         return "/planets/planets";
     }

@@ -3,13 +3,10 @@ package star.wars.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import star.wars.app.models.films.Film;
 import star.wars.app.models.people.Person;
-import star.wars.app.models.planets.Planet;
-import star.wars.app.models.species.Species;
 import star.wars.app.models.vehicles.Vehicle;
 import star.wars.app.models.vehicles.Vehicles;
 import star.wars.app.utilities.EndPoints;
@@ -20,9 +17,9 @@ import java.util.List;
 @Controller
 public class VehiclesController {
 
-    @GetMapping("/vehicles/details/{name}")
+    @GetMapping("/vehicles/details")
     public String viewVehicle(RestTemplate restTemplate, ModelMap modelMap,
-                                  @PathVariable String name) {
+                              @RequestParam(value = "name", defaultValue = "") String name) {
 
         List<Vehicle> results = new ArrayList<>();
         Vehicles vehicles = restTemplate.getForObject(EndPoints.SEARCH_VEHICLES + name, Vehicles.class);
@@ -69,7 +66,7 @@ public class VehiclesController {
             vehicles = restTemplate.getForObject(nextPage, Vehicles.class);
         }
         results.addAll(vehicles.getResults());
-        modelMap.addAttribute("count", vehicles.getCount());
+        modelMap.addAttribute("count", results.size());
         modelMap.addAttribute("vehicles", results);
         return "/vehicles/vehicles";
     }

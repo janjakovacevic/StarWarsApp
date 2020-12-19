@@ -34,7 +34,7 @@
                 <th>Population</th>
             </tr>
             <tr  th:each="planet : ${planets}">
-                <td><a class="hyperlink-text" th:href="${'/planets/details/' + planet.name}" th:text="${planet.name}">Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/planets/details(name=${planet.name})}" th:text="${planet.name}">Name</a></td>
                 <td th:text="${planet.rotation_period}"></td>
                 <td th:text="${planet.orbital_period}"></td>
                 <td th:text="${planet.diameter}"></td>

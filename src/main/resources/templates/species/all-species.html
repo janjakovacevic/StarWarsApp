@@ -34,7 +34,7 @@
                 <th>Language</th>
             </tr>
             <tr  th:each="species : ${allSpecies}">
-                <td><a class="hyperlink-text" th:href="${'/species/details/' + species.name}" th:text="${species.name}">Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/species/details(name=${species.name})}" th:text="${species.name}">Name</a></td>
                 <td th:text="${species.classification}"></td>
                 <td th:text="${species.designation}"></td>
                 <td th:text="${species.average_height}"></td>

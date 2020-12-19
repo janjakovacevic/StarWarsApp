@@ -31,7 +31,7 @@
                 <th>Release Date</th>
             </tr>
             <tr  th:each="film : ${films}">
-                <td><a class="hyperlink-text" th:href="${'/films/details/' + film.title}" th:text="${film.title}">Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/films/details(title=${film.title})}" th:text="${film.title}">Name</a></td>
                 <td th:text="${film.episode_id}"></td>
                 <td th:text="${film.opening_crawl}"></td>
                 <td th:text="${film.director}"></td>

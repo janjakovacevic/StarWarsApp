@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <th>Homeworld</th>
-                <td><a class="hyperlink-text" th:href="${'/planets/details/' + species.homeworld}" th:text="${species.homeworld}">Planet Name</a></td>
+                <td><a class="hyperlink-text" th:href="@{/planets/details(name=${species.homeworld})}" th:text="${species.homeworld}">Planet Name</a></td>
             </tr>
             <tr>
                 <th>Language</th>
@@ -57,7 +57,7 @@
                 <th>People</th>
                 <td>
                     <div th:each="person : ${species.people}">
-                        <a class="hyperlink-text" th:href="${'/people/details/' + person}" th:text="${person}">Name</a>
+                        <a class="hyperlink-text" th:href="@{/people/details(name=${person})}" th:text="${person}">Name</a>
                     </div>
                 </td>
             </tr>
@@ -66,7 +66,7 @@
                 <th>Films</th>
                 <td>
                     <div th:each="film : ${species.films}">
-                        <a class="hyperlink-text" th:href="${'/films/details/' + film}" th:text="${film}">Title</a>
+                        <a class="hyperlink-text" th:href="@{/films/details(title=${film})}" th:text="${film}">Title</a>
                     </div>
                 </td>
             </tr>
