@@ -66,7 +66,7 @@
                 <th>Films</th>
                 <td>
                     <div th:each="film : ${vehicle.films}">
-                        <a class="hyperlink-text" th:href="@{/films/details(title=${film})}" th:text="${film}">Title</a>
+                        <a class="hyperlink-text" th:href="@{/films/details(titlew=${film})}" th:text="${film}">Title</a>
                     </div>
                 </td>
             </tr>

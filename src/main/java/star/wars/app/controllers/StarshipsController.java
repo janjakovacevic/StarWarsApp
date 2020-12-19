@@ -21,32 +21,9 @@ public class StarshipsController {
     public String viewVehicle(RestTemplate restTemplate, ModelMap modelMap,
                               @RequestParam(value = "name", defaultValue = "") String name) {
 
-        List<Starship> results = new ArrayList<>();
-        Starships starships = restTemplate.getForObject(EndPoints.SEARCH_STARSHIPS + name, Starships.class);
-
-        while(starships.getNext() != null){
-            results.addAll(starships.getResults());
-            String nextPage = starships.getNext().replace("http", "https");
-            starships = restTemplate.getForObject(nextPage, Starships.class);
-        }
-        results.addAll(starships.getResults());
-
+        List<Starship> results = getAllStarshipsByName(restTemplate, name);
         for (Starship starship : results) {
-
-            List<String> pilotsNames = new ArrayList<>();
-            for(int i = 0; i < starship.getPilots().size(); i++){
-                String pilot = starship.getPilots().get(i).replace("http", "https");
-                pilotsNames.add(restTemplate.getForObject(pilot, Person.class).getName());
-            }
-            starship.setPilots(pilotsNames);
-
-            List<String> filmTitles = new ArrayList<>();
-            for (int i = 0; i < starship.getFilms().size(); i++) {
-                String film = starship.getFilms().get(i).replace("http", "https");
-                filmTitles.add(restTemplate.getForObject(film, Film.class).getTitle());
-            }
-            starship.setFilms(filmTitles);
-
+            changeURLsToNames(restTemplate, starship);
         }
 
         modelMap.addAttribute("starship", results.get(0));
@@ -57,18 +34,51 @@ public class StarshipsController {
     public String searchStarships(RestTemplate restTemplate, ModelMap modelMap,
                                    @RequestParam(value = "query", defaultValue = "") String query) {
 
-        List<Starship> results = new ArrayList<>();
-        Starships starships = restTemplate.getForObject(EndPoints.SEARCH_STARSHIPS + query, Starships.class);
-
-        while(starships.getNext() != null){
-            results.addAll(starships.getResults());
-            String nextPage = starships.getNext().replace("http", "https");
-            starships = restTemplate.getForObject(nextPage, Starships.class);
-        }
-        results.addAll(starships.getResults());
+        List<Starship> results = getAllStarshipsByName(restTemplate, query);
         modelMap.addAttribute("count", results.size());
         modelMap.addAttribute("starships", results);
         return "/starships/starships";
+    }
+
+    private void changeURLsToNames(RestTemplate restTemplate, Starship starship) {
+        setStarshipPilotNames(restTemplate, starship);
+        setStarshipFilmNames(restTemplate, starship);
+    }
+
+    private void setStarshipFilmNames(RestTemplate restTemplate, Starship starship) {
+        List<String> filmTitles = new ArrayList<>();
+        for (int i = 0; i < starship.getFilms().size(); i++) {
+            String film = starship.getFilms().get(i).replace("http", "https");
+            filmTitles.add(restTemplate.getForObject(film, Film.class).getTitle());
+        }
+        starship.setFilms(filmTitles);
+    }
+
+    private void setStarshipPilotNames(RestTemplate restTemplate, Starship starship) {
+        List<String> pilotsNames = new ArrayList<>();
+        for(int i = 0; i < starship.getPilots().size(); i++){
+            String pilot = starship.getPilots().get(i).replace("http", "https");
+            pilotsNames.add(restTemplate.getForObject(pilot, Person.class).getName());
+        }
+        starship.setPilots(pilotsNames);
+    }
+
+    private List<Starship> getAllStarshipsByName(RestTemplate restTemplate, String name) {
+        List<Starship> results = new ArrayList<>();
+        Starships starships = restTemplate.getForObject(EndPoints.SEARCH_STARSHIPS + name, Starships.class);
+
+        while (starships.getNext() != null) {
+            results.addAll(starships.getResults());
+            starships = getNextPage(restTemplate, starships);
+        }
+        results.addAll(starships.getResults());
+        return results;
+    }
+
+    private Starships getNextPage(RestTemplate restTemplate, Starships starships) {
+        String nextPage = starships.getNext().replace("http", "https");
+        starships = restTemplate.getForObject(nextPage, Starships.class);
+        return starships;
     }
 
 }

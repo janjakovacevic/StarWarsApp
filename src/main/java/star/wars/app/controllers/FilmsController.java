@@ -54,71 +54,46 @@ public class FilmsController {
     private void setFilmSpeciesNames(RestTemplate restTemplate, Film film) {
         List<String> speciesNames = new ArrayList<>();
         for(int i = 0; i < film.getSpecies().size(); i++){
-            String speciesName = getSpeciesName(restTemplate, film, i);
-            speciesNames.add(speciesName);
+            String species = film.getSpecies().get(i).replace("http", "https");
+            speciesNames.add(restTemplate.getForObject(species, Species.class).getName());
         }
         film.setSpecies(speciesNames);
-    }
-
-    private String getSpeciesName(RestTemplate restTemplate, Film film, int i) {
-        String species = film.getSpecies().get(i).replace("http", "https");
-        return restTemplate.getForObject(species, Species.class).getName();
     }
 
     private void setFilmVehicleNames(RestTemplate restTemplate, Film film) {
         List<String> vehicleNames = new ArrayList<>();
         for(int i = 0; i < film.getVehicles().size(); i++){
-            String vehicleName = getVehicleName(restTemplate, film, i);
-            vehicleNames.add(vehicleName);
+            String vehicle = film.getVehicles().get(i).replace("http", "https");
+            vehicleNames.add(restTemplate.getForObject(vehicle, Vehicle.class).getName());
         }
         film.setVehicles(vehicleNames);
-    }
-
-    private String getVehicleName(RestTemplate restTemplate, Film film, int i) {
-        String vehicle = film.getVehicles().get(i).replace("http", "https");
-        return restTemplate.getForObject(vehicle, Vehicle.class).getName();
     }
 
     private void setFilmStarshipNames(RestTemplate restTemplate, Film film) {
         List<String> starshipNames = new ArrayList<>();
         for(int i = 0; i < film.getStarships().size(); i++){
-            String starshipName = getStarshipName(restTemplate, film, i);
-            starshipNames.add(starshipName);
+            String starship = film.getStarships().get(i).replace("http", "https");
+            starshipNames.add(restTemplate.getForObject(starship, Starship.class).getName());
         }
         film.setStarships(starshipNames);
-    }
-
-    private String getStarshipName(RestTemplate restTemplate, Film film, int i) {
-        String starship = film.getStarships().get(i).replace("http", "https");
-        return restTemplate.getForObject(starship, Starship.class).getName();
     }
 
     private void setFilmPlanetNames(RestTemplate restTemplate, Film film) {
         List<String> planetNames = new ArrayList<>();
         for(int i = 0; i < film.getPlanets().size(); i++) {
-            String planetName = getPlanetName(restTemplate, film, i);
-            planetNames.add(planetName);
+            String planet = film.getPlanets().get(i).replace("http", "https");
+            planetNames.add(restTemplate.getForObject(planet, Planet.class).getName());
         }
         film.setPlanets(planetNames);
-    }
-
-    private String getPlanetName(RestTemplate restTemplate, Film film, int i) {
-        String planet = film.getPlanets().get(i).replace("http", "https");
-        return restTemplate.getForObject(planet, Planet.class).getName();
     }
 
     private void setFilmCharacterNames(RestTemplate restTemplate, Film film) {
         List<String> characterNames = new ArrayList<>();
         for(int i = 0; i < film.getCharacters().size(); i++){
-            String characterName = getCharacterName(restTemplate, film, i);
-            characterNames.add(characterName);
+            String character = film.getCharacters().get(i).replace("http", "https");
+            characterNames.add(restTemplate.getForObject(character, Person.class).getName());
         }
         film.setCharacters(characterNames);
-    }
-
-    private String getCharacterName(RestTemplate restTemplate, Film film, int i) {
-        String character = film.getCharacters().get(i).replace("http", "https");
-        return restTemplate.getForObject(character, Person.class).getName();
     }
 
     private void changeURLsToNames(RestTemplate restTemplate, Film film) {
