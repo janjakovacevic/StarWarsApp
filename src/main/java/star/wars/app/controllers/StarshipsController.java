@@ -69,16 +69,12 @@ public class StarshipsController {
 
         while (starships.getNext() != null) {
             results.addAll(starships.getResults());
-            starships = getNextPage(restTemplate, starships);
+            String nextPage = starships.getNext().replace("http", "https");
+            starships = restTemplate.getForObject(nextPage, Starships.class);
         }
         results.addAll(starships.getResults());
         return results;
     }
 
-    private Starships getNextPage(RestTemplate restTemplate, Starships starships) {
-        String nextPage = starships.getNext().replace("http", "https");
-        starships = restTemplate.getForObject(nextPage, Starships.class);
-        return starships;
-    }
 
 }

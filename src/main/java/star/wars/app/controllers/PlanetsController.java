@@ -71,15 +71,11 @@ public class PlanetsController {
 
         while (planets.getNext() != null) {
             results.addAll(planets.getResults());
-            planets = getNextPage(restTemplate, planets);
+            String nextPage = planets.getNext().replace("http", "https");
+            planets = restTemplate.getForObject(nextPage, Planets.class);
         }
         results.addAll(planets.getResults());
         return results;
     }
 
-    private Planets getNextPage(RestTemplate restTemplate, Planets planets) {
-        String nextPage = planets.getNext().replace("http", "https");
-        planets = restTemplate.getForObject(nextPage, Planets.class);
-        return planets;
-    }
 }

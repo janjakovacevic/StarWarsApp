@@ -50,16 +50,11 @@ public class SpeciesController {
 
         while (allSpecies.getNext() != null) {
             results.addAll(allSpecies.getResults());
-            allSpecies = getNextPage(restTemplate, allSpecies);
+            String nextPage = allSpecies.getNext().replace("http", "https");
+            allSpecies = restTemplate.getForObject(nextPage, AllSpecies.class);
         }
         results.addAll(allSpecies.getResults());
         return results;
-    }
-
-    private AllSpecies getNextPage(RestTemplate restTemplate, AllSpecies allSpecies) {
-        String nextPage = allSpecies.getNext().replace("http", "https");
-        allSpecies = restTemplate.getForObject(nextPage, AllSpecies.class);
-        return allSpecies;
     }
 
     private void changeURLsToNames(RestTemplate restTemplate, Species species) {

@@ -100,17 +100,12 @@ public class PeopleController {
         List<Person> results = new ArrayList<>();
         while (people.getNext() != null) {
             results.addAll(people.getResults());
-            people = getNextPage(restTemplate, people);
+            String nextPage = people.getNext().replace("http", "https");
+            people = restTemplate.getForObject(nextPage, People.class);
         }
         results.addAll(people.getResults());
 
         return results;
-    }
-
-    private People getNextPage(RestTemplate restTemplate, People people) {
-        String nextPage = people.getNext().replace("http", "https");
-        people = restTemplate.getForObject(nextPage, People.class);
-        return people;
     }
 
 }

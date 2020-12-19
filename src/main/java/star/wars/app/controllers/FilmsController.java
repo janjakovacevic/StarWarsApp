@@ -45,12 +45,6 @@ public class FilmsController {
         return "/films/films";
     }
 
-    private Films getNextPage(RestTemplate restTemplate, Films films) {
-        String nextPage = films.getNext().replace("http", "https");
-        films = restTemplate.getForObject(nextPage, Films.class);
-        return films;
-    }
-
     private void setFilmSpeciesNames(RestTemplate restTemplate, Film film) {
         List<String> speciesNames = new ArrayList<>();
         for(int i = 0; i < film.getSpecies().size(); i++){
@@ -110,7 +104,8 @@ public class FilmsController {
         List<Film> results = new ArrayList<>();
         while(films.getNext() != null){
             results.addAll(films.getResults());
-            films = getNextPage(restTemplate, films);
+            String nextPage = films.getNext().replace("http", "https");
+            films = restTemplate.getForObject(nextPage, Films.class);
         }
         results.addAll(films.getResults());
         return results;

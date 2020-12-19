@@ -69,17 +69,12 @@ public class VehiclesController {
         List<Vehicle> results = new ArrayList<>();
         while (vehicles.getNext() != null) {
             results.addAll(vehicles.getResults());
-            vehicles = getNextPage(restTemplate, vehicles);
+            String nextPage = vehicles.getNext().replace("http", "https");
+            vehicles = restTemplate.getForObject(nextPage, Vehicles.class);
         }
         results.addAll(vehicles.getResults());
 
         return results;
-    }
-
-    private Vehicles getNextPage(RestTemplate restTemplate, Vehicles vehicles) {
-        String nextPage = vehicles.getNext().replace("http", "https");
-        vehicles = restTemplate.getForObject(nextPage, Vehicles.class);
-        return vehicles;
     }
 
 }
